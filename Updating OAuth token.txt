@@ -1,0 +1,13 @@
+First let's retrieve all authorizations tokens. Execute the command below:
+
+curl -i -u {your-github-username} GET 'https://github.ccs.neu.edu/api/v3/authorizations'
+
+You will see a list of OAuth tokens which are associated with your GitHub username. If you have multiple OAuth tokens, you can match your token with the "token_last_eight" field - match this with the last eight characters of your 40 character token (which was generated for running the previous scripts).
+
+Make note of the "id" of *this* OAuth token. We will use this id to modify the OAuth token's permissions. Execute the command below:
+
+curl -i -u {your-github-username} -X 'PATCH' -d '{"add_scopes":"delete_repo"}' 'https://github.ccs.neu.edu/api/v3/authorizations/{id}'
+
+You receive a JSON response. Check the "scopes" field for "delete_repo" - this confirms if the permission to delete a repo is added. 
+
+
